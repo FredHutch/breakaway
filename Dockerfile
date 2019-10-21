@@ -4,7 +4,17 @@ MAINTAINER sminot@fredhutch.org
 # Install prerequisites and R
 RUN apt update && \
     ln -fs /usr/share/zoneinfo/Europe/Dublin /etc/localtime && \
-    apt-get install -y build-essential wget unzip r-base libssl-dev libxml2-dev libcurl4-openssl-dev
+    apt install -y \
+    build-essential \
+    wget \
+    unzip \
+    r-base \
+    r-base-dev \
+    r-recommended \
+    libssl-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev && \
+    apt-add-repository "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/"
 
 # Install devtools
 RUN R -e "install.packages('curl', repos = 'http://cran.us.r-project.org'); library(curl)"
@@ -15,8 +25,7 @@ RUN R -e "install.packages('tidyverse', repos = 'http://cran.us.r-project.org');
 RUN R -e "install.packages('vroom', repos = 'http://cran.us.r-project.org'); library(vroom)"
 
 # Install Phyloseq
-RUN R -e "source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq')"
-
+RUN R -e "source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq'); library(phyloseq)"
 
 # Install breakaway
 RUN R -e "library(devtools); devtools::install_github('adw96/breakaway')"
