@@ -14,5 +14,9 @@ RUN R -e "install.packages('devtools', repos = 'http://cran.us.r-project.org'); 
 RUN R -e "install.packages('tidyverse', repos = 'http://cran.us.r-project.org'); library(tidyverse)"
 RUN R -e "install.packages('vroom', repos = 'http://cran.us.r-project.org'); library(vroom)"
 
+# Install Phyloseq
+RUN R -e "source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq')"
+
+
 # Install breakaway
 RUN R -e "library(devtools); devtools::install_github('adw96/breakaway')"
