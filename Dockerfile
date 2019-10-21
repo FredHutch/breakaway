@@ -14,7 +14,7 @@ RUN apt update && \
     libssl-dev \
     libxml2-dev \
     libcurl4-openssl-dev \
-    software-properties-common && && \
+    software-properties-common && \
     apt-add-repository "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/"
 
 # Install devtools
