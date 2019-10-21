@@ -34,7 +34,7 @@ RUN R -e "install.packages('tidyverse', repos = 'http://cran.us.r-project.org');
 RUN R -e "install.packages('vroom', repos = 'http://cran.us.r-project.org'); library(vroom)"
 
 # Install Phyloseq
-RUN R -e "source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq'); library(phyloseq)"
+RUN R -e "install.packages('BiocManager', repos = 'http://cran.us.r-project.org'); BiocManager::install()"
 
 # Install breakaway
 RUN R -e "library(devtools); devtools::install_github('adw96/breakaway')"
