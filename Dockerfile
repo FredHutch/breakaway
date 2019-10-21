@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 MAINTAINER sminot@fredhutch.org
 
-# Install prerequisites and R
+# Install prerequisites
 RUN apt update && \
     ln -fs /usr/share/zoneinfo/Europe/Dublin /etc/localtime && \
     apt install -y \
@@ -16,9 +16,14 @@ RUN apt update && \
     libcurl4-openssl-dev \
     software-properties-common
 
-# Install repository with R
+# Install repository with R and install R
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
-    apt-add-repository "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/"
+    apt-add-repository "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" && \
+    apt update && \
+    apt install -y \
+    r-base \
+    r-base-dev \
+    r-recommended
 
 # Install devtools
 RUN R -e "install.packages('curl', repos = 'http://cran.us.r-project.org'); library(curl)"
